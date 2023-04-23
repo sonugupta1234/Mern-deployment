@@ -16,9 +16,10 @@ route.post("/add",async(req,res)=>{
 })
 
 route.post("/postdata",async(req,res)=>{
-    const {companyname, primaryText, headline,  description}=req.body
+    // const {companyname, primaryText, headline,  description}=req.body
+    const {value}=req.body
     try {
-        const user=await adsModel.aggregate([{ $match: { $or: [ { companyname: companyname }, { description: description }, {primaryText: primaryText},{headline: headline} ] } }])
+        const user=await adsModel.aggregate([{ $match: { $or: [ { companyname: value }, { description: value }, {primaryText: value},{headline: value} ] } }])
         res.status(200).send(user)
     } catch (error) {
         res.status(400).send({"msg": error.message})
